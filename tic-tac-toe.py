@@ -44,7 +44,7 @@ def get_players_symbol(player):
     return "-"
 
 
-def create_playground():
+def draw_playground():
     playground = ""
     current_playfield = 0
     for row in range(COLUMN_COUNT):
@@ -65,7 +65,7 @@ def create_playground():
             for x in range(PLAYGROUND_WIDTH):
                 middle_line = middle_line + "-"
             playground += middle_line + "\n"
-    return playground
+    print(playground)
 
 
 def set_available_positions():
@@ -74,18 +74,27 @@ def set_available_positions():
             avabilable_positions.append(index)
 
 
-def place_symbol(symbol, position):
+def place_player_position(player, position):
     position_index = position - 1
+    print(position_index in avabilable_positions)
     if position_index in avabilable_positions:
-        positions_status[position_index] = symbol
+        positions_status[position_index] = player
+        return
+    print(
+        f"Position: {position} is not playable. Please choose an avaiable position!")
 
 
 print("\n")
-print(create_playground())
+draw_playground()
 set_available_positions()
 
-place_symbol(1, 1)
-place_symbol(2, 5)
-print(positions_status)
-print(create_playground())
+place_player_position(1, 1)
+print("\n")
+draw_playground()
+place_player_position(2, 5)
+print("\n")
+draw_playground()
+place_player_position(1, 5)
+print("\n")
+draw_playground()
 # p = input("PLAYER X [Symbol: Z]: Which Position would you take?\t")
