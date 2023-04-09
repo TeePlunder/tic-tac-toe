@@ -69,7 +69,8 @@ def place_symbol(symbol, position):
 
 print(create_playground())
 set_available_positions()
-print(place_symbol(1, 1))
-print(place_symbol(2, 5))
+
+place_symbol(1, 1)
+place_symbol(2, 5)
 print(positions_status)
 # p = input("PLAYER X [Symbol: Z]: Which Position would you take?\t")
