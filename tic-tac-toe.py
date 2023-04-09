@@ -32,16 +32,29 @@ PLAYGROUND_WIDTH = SELECTION_FIELD_WIDTH * COLUMN_COUNT + SPACE_TO_SYMBOL
 # only positions with status 0 can be edited
 positions_status = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 avabilable_positions = []
+PLAYER1_SYMBOL = "X"
+PLAYER2_SYMBOL = "O"
+
+
+def get_players_symbol(player):
+    if player == 1:
+        return PLAYER1_SYMBOL
+    if player == 2:
+        return PLAYER2_SYMBOL
+    return "-"
 
 
 def create_playground():
     playground = ""
+    current_playfield = 0
     for row in range(COLUMN_COUNT):
         line = ""
         for field in range(COLUMN_COUNT):
             for selection_field in range(SELECTION_FIELD_WIDTH):
                 if selection_field == calc_mid(SELECTION_FIELD_WIDTH):
-                    line += "-"
+                    line += get_players_symbol(
+                        positions_status[current_playfield])
+                    current_playfield += 1
                     continue
                 line += " "
             if field != COLUMN_COUNT - 1:
@@ -67,10 +80,12 @@ def place_symbol(symbol, position):
         positions_status[position_index] = symbol
 
 
+print("\n")
 print(create_playground())
 set_available_positions()
 
 place_symbol(1, 1)
 place_symbol(2, 5)
 print(positions_status)
+print(create_playground())
 # p = input("PLAYER X [Symbol: Z]: Which Position would you take?\t")
