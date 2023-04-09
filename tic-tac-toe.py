@@ -26,22 +26,24 @@ PLAYGROUND_WIDTH = SELECTION_FIELD_WIDTH * COLUMN_COUNT + SPACE_TO_SYMBOL
 
 
 def draw_playground():
+    playground = ""
     for row in range(COLUMN_COUNT):
         line = ""
         for field in range(COLUMN_COUNT):
             for selection_field in range(SELECTION_FIELD_WIDTH):
                 if selection_field == calc_mid(SELECTION_FIELD_WIDTH):
-                    line = line + "-"
+                    line += "-"
                     continue
-                line = line + " "
+                line += " "
             if field != COLUMN_COUNT - 1:
-                line = line + "|"
-        print(line)
+                line += "|"
+        playground += line + "\n"
         middle_line = ""
         if row != COLUMN_COUNT - 1:
             for x in range(PLAYGROUND_WIDTH):
                 middle_line = middle_line + "-"
-            print(middle_line)
+            playground += middle_line + "\n"
+    return playground
 
 
-draw_playground()
+print(draw_playground())
