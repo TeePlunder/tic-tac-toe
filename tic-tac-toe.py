@@ -1,17 +1,7 @@
 import os
-from time import sleep
 
 
 def clear_console(): return os.system("clear")
-
-# t = input("WElches feld? =")
-
-# text = ""
-# for x in range(100):
-#     print(text)
-#     text += "| "
-#     sleep(0.8)
-#     clear_console()
 
 
 def calc_mid(number):
@@ -134,5 +124,3 @@ while not win_or_draw(current_player):
     if win_or_draw(current_player):
         break
     current_player = switch_players(current_player)
-
-# p = input("PLAYER X [Symbol: Z]: Which Position would you take?\t")
