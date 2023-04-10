@@ -76,24 +76,85 @@ def available_positions():
     return positions
 
 
+def position_available(position_index):
+    return position_index in available_positions()
+
+
 def place_player_position(player, position):
     position_index = position - 1
-    # print(position_index)
-    # print(avabilable_positions)
-    # print(position_index in avabilable_positions)
-    if position_index not in available_positions():
+    if not position_available(position_index):
         print(
             f"[PLAYER {1}]: Position {position} is not playable. Please choose an avaiable position!")
         print("\n")
         return
     positions_status[position_index] = player
     draw_playground()
+    win_or_draw()
+
+
+def win_or_draw():
+    if positions_status[0] == 1 and positions_status[1] == 1 and positions_status[2] == 1:
+        print("win")
+        return True
+    if positions_status[3] == 1 and positions_status[4] == 1 and positions_status[5] == 1:
+        print("win")
+        return True
+    if positions_status[6] == 1 and positions_status[7] == 1 and positions_status[8] == 1:
+        print("win")
+        return True
+    if positions_status[0] == 1 and positions_status[4] == 1 and positions_status[8] == 1:
+        print("win")
+        return True
+    if positions_status[2] == 1 and positions_status[4] == 1 and positions_status[6] == 1:
+        print("win")
+        return True
+    if positions_status[0] == 1 and positions_status[4] == 1 and positions_status[6] == 1:
+        print("win")
+        return True
+    if positions_status[0] == 1 and positions_status[3] == 1 and positions_status[6] == 1:
+        print("win")
+        return True
+    if positions_status[1] == 1 and positions_status[4] == 1 and positions_status[7] == 1:
+        print("win")
+        return True
+    if positions_status[2] == 1 and positions_status[5] == 1 and positions_status[8] == 1:
+        print("win")
+        return True
+    print("nothing")
+    return False
 
 
 draw_playground()
+# place_player_position(1, 1)
+# place_player_position(1, 2)
+# place_player_position(1, 3)
 
-place_player_position(1, 1)
-place_player_position(2, 5)
-place_player_position(1, 5)
-place_player_position(1, 2)
+# place_player_position(1, 4)
+# place_player_position(1, 5)
+# place_player_position(1, 6)
+
+# place_player_position(1, 7)
+# place_player_position(1, 8)
+# place_player_position(1, 9)
+
+# place_player_position(1, 1)
+# place_player_position(1, 5)
+# place_player_position(1, 9)
+
+# place_player_position(1, 3)
+# place_player_position(1, 5)
+# place_player_position(1, 7)
+
+# place_player_position(1, 1)
+# place_player_position(1, 4)
+# place_player_position(1, 7)
+
+# place_player_position(1, 2)
+# place_player_position(1, 5)
+# place_player_position(1, 8)
+
+# place_player_position(1, 3)
+# place_player_position(1, 6)
+# place_player_position(1, 9)
+
 # p = input("PLAYER X [Symbol: Z]: Which Position would you take?\t")
