@@ -89,35 +89,35 @@ def place_player_position(player, position):
         return
     positions_status[position_index] = player
     draw_playground()
-    win_or_draw()
+    win_or_draw(player)
 
 
-def win_or_draw():
-    if positions_status[0] == 1 and positions_status[1] == 1 and positions_status[2] == 1:
+def win_or_draw(player):
+    if positions_status[0] == player and positions_status[1] == player and positions_status[2] == player:
         print("win")
         return True
-    if positions_status[3] == 1 and positions_status[4] == 1 and positions_status[5] == 1:
+    if positions_status[3] == player and positions_status[4] == player and positions_status[5] == player:
         print("win")
         return True
-    if positions_status[6] == 1 and positions_status[7] == 1 and positions_status[8] == 1:
+    if positions_status[6] == player and positions_status[7] == player and positions_status[8] == player:
         print("win")
         return True
-    if positions_status[0] == 1 and positions_status[4] == 1 and positions_status[8] == 1:
+    if positions_status[0] == player and positions_status[4] == player and positions_status[8] == player:
         print("win")
         return True
-    if positions_status[2] == 1 and positions_status[4] == 1 and positions_status[6] == 1:
+    if positions_status[2] == player and positions_status[4] == player and positions_status[6] == player:
         print("win")
         return True
-    if positions_status[0] == 1 and positions_status[4] == 1 and positions_status[6] == 1:
+    if positions_status[0] == player and positions_status[4] == player and positions_status[6] == player:
         print("win")
         return True
-    if positions_status[0] == 1 and positions_status[3] == 1 and positions_status[6] == 1:
+    if positions_status[0] == player and positions_status[3] == player and positions_status[6] == player:
         print("win")
         return True
-    if positions_status[1] == 1 and positions_status[4] == 1 and positions_status[7] == 1:
+    if positions_status[1] == player and positions_status[4] == player and positions_status[7] == player:
         print("win")
         return True
-    if positions_status[2] == 1 and positions_status[5] == 1 and positions_status[8] == 1:
+    if positions_status[2] == player and positions_status[5] == player and positions_status[8] == player:
         print("win")
         return True
     print("nothing")
