@@ -64,7 +64,7 @@ def draw_playground():
     print("\n")
 
 
-def available_positions():
+def available_positions_index():
     positions = []
     for index, pos in enumerate(positions_status):
         if pos == 0:
@@ -72,8 +72,16 @@ def available_positions():
     return positions
 
 
+def available_positions():
+    positions = []
+    for index, pos in enumerate(positions_status):
+        if pos == 0:
+            positions.append(index + 1)
+    return positions
+
+
 def position_available(position_index):
-    return position_index in available_positions()
+    return position_index in available_positions_index()
 
 
 def place_player_position(player, position):
@@ -87,19 +95,34 @@ def place_player_position(player, position):
     draw_playground()
 
 
+def position_input(player):
+    while True:
+        pos = input(
+            f"PLAYER {player}: Which Position would you take?\n" +
+            f"Available positions: {available_positions()}\n" +
+            "=> ")
+        if position_available(int(pos) - 1):
+            break
+        print("\n")
+        print(
+            f"[PLAYER {player}]: Position {pos} is not playable. Please choose an avaiable position!")
+        print("\n")
+    return int(pos)
+
+
 def win_or_draw(player):
     win_message = f"WINNN for PLAYER {player}"
-    for i in range(3):
-        if all(positions_status[i*3 + j] == player for j in range(3)):
+    for x in range(3):
+        if all(positions_status[x*3 + y] == player for y in range(3)):
             print(win_message)
             return True
-        if all(positions_status[j*3 + i] == player for j in range(3)):
+        if all(positions_status[y*3 + x] == player for y in range(3)):
             print(win_message)
             return True
-    if all(positions_status[i*3 + i] == player for i in range(3)):
+    if all(positions_status[x*3 + x] == player for x in range(3)):
         print(win_message)
         return True
-    if all(positions_status[i*3 + (2-i)] == player for i in range(3)):
+    if all(positions_status[x*3 + (2-x)] == player for x in range(3)):
         print(win_message)
         return True
     if all_positions_used():
@@ -115,12 +138,10 @@ def all_positions_used():
 draw_playground()
 current_player = 1
 while not win_or_draw(current_player):
-    position = input(
-        f"PLAYER {current_player}: Which Position would you take?\n" +
-        f"Available positions: {[pos + 1 for pos in available_positions()]}\n" +
-        "=> ")
+    position = position_input(current_player)
+    clear_console()
     print("\n")
-    place_player_position(current_player, int(position))
+    place_player_position(current_player, position)
     if win_or_draw(current_player):
         break
     current_player = switch_players(current_player)
