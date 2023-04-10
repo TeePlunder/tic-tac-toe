@@ -43,6 +43,12 @@ def get_players_symbol(player):
     return "-"
 
 
+def switch_players(player):
+    if player == 1:
+        return 2
+    return 1
+
+
 def draw_playground():
     playground = ""
     current_playfield = 0
@@ -94,67 +100,51 @@ def place_player_position(player, position):
 
 def win_or_draw(player):
     if positions_status[0] == player and positions_status[1] == player and positions_status[2] == player:
-        print("win")
+        print(f"WINNN for PLAYER {player}")
         return True
     if positions_status[3] == player and positions_status[4] == player and positions_status[5] == player:
-        print("win")
+        print(f"WINNN for PLAYER {player}")
         return True
     if positions_status[6] == player and positions_status[7] == player and positions_status[8] == player:
-        print("win")
+        print(f"WINNN for PLAYER {player}")
         return True
     if positions_status[0] == player and positions_status[4] == player and positions_status[8] == player:
-        print("win")
+        print(f"WINNN for PLAYER {player}")
         return True
     if positions_status[2] == player and positions_status[4] == player and positions_status[6] == player:
-        print("win")
+        print(f"WINNN for PLAYER {player}")
         return True
     if positions_status[0] == player and positions_status[4] == player and positions_status[6] == player:
-        print("win")
+        print(f"WINNN for PLAYER {player}")
         return True
     if positions_status[0] == player and positions_status[3] == player and positions_status[6] == player:
-        print("win")
+        print(f"WINNN for PLAYER {player}")
         return True
     if positions_status[1] == player and positions_status[4] == player and positions_status[7] == player:
-        print("win")
+        print(f"WINNN for PLAYER {player}")
         return True
     if positions_status[2] == player and positions_status[5] == player and positions_status[8] == player:
-        print("win")
+        print(f"WINNN for PLAYER {player}")
         return True
-    print("nothing")
+
+    # TODO: fix winning condition
+
+    if all_positions_used():
+        print("DRAWW")
+        return True
     return False
 
 
+def all_positions_used():
+    return positions_status.count(0) <= 0
+
+
 draw_playground()
-# place_player_position(1, 1)
-# place_player_position(1, 2)
-# place_player_position(1, 3)
-
-# place_player_position(1, 4)
-# place_player_position(1, 5)
-# place_player_position(1, 6)
-
-# place_player_position(1, 7)
-# place_player_position(1, 8)
-# place_player_position(1, 9)
-
-# place_player_position(1, 1)
-# place_player_position(1, 5)
-# place_player_position(1, 9)
-
-# place_player_position(1, 3)
-# place_player_position(1, 5)
-# place_player_position(1, 7)
-
-# place_player_position(1, 1)
-# place_player_position(1, 4)
-# place_player_position(1, 7)
-
-# place_player_position(1, 2)
-# place_player_position(1, 5)
-# place_player_position(1, 8)
-
-# place_player_position(1, 3)
-# place_player_position(1, 6)
-# place_player_position(1, 9)
+current_player = 1
+while not win_or_draw(current_player):
+    position = input(
+        f"PLAYER {current_player}: Which Position would you take?\t")
+    place_player_position(current_player, int(position))
+    current_player = switch_players(current_player)
 
 # p = input("PLAYER X [Symbol: Z]: Which Position would you take?\t")
