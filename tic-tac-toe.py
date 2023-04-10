@@ -76,8 +76,8 @@ def draw_playground():
 
 def available_positions():
     positions = []
-    for index, position in enumerate(positions_status):
-        if position == 0:
+    for index, pos in enumerate(positions_status):
+        if pos == 0:
             positions.append(index)
     return positions
 
@@ -126,7 +126,9 @@ draw_playground()
 current_player = 1
 while not win_or_draw(current_player):
     position = input(
-        f"PLAYER {current_player}: Which Position would you take?\t")
+        f"PLAYER {current_player}: Which Position would you take?\n" +
+        f"Available positions: {[pos + 1 for pos in available_positions()]}\n" +
+        "=> ")
     print("\n")
     place_player_position(current_player, int(position))
     if win_or_draw(current_player):
