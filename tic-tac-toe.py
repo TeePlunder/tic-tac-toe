@@ -95,40 +95,23 @@ def place_player_position(player, position):
         return
     positions_status[position_index] = player
     draw_playground()
-    win_or_draw(player)
 
 
 def win_or_draw(player):
-    if positions_status[0] == player and positions_status[1] == player and positions_status[2] == player:
-        print(f"WINNN for PLAYER {player}")
+    win_message = f"WINNN for PLAYER {player}"
+    for i in range(3):
+        if all(positions_status[i*3 + j] == player for j in range(3)):
+            print(win_message)
+            return True
+        if all(positions_status[j*3 + i] == player for j in range(3)):
+            print(win_message)
+            return True
+    if all(positions_status[i*3 + i] == player for i in range(3)):
+        print(win_message)
         return True
-    if positions_status[3] == player and positions_status[4] == player and positions_status[5] == player:
-        print(f"WINNN for PLAYER {player}")
+    if all(positions_status[i*3 + (2-i)] == player for i in range(3)):
+        print(win_message)
         return True
-    if positions_status[6] == player and positions_status[7] == player and positions_status[8] == player:
-        print(f"WINNN for PLAYER {player}")
-        return True
-    if positions_status[0] == player and positions_status[4] == player and positions_status[8] == player:
-        print(f"WINNN for PLAYER {player}")
-        return True
-    if positions_status[2] == player and positions_status[4] == player and positions_status[6] == player:
-        print(f"WINNN for PLAYER {player}")
-        return True
-    if positions_status[0] == player and positions_status[4] == player and positions_status[6] == player:
-        print(f"WINNN for PLAYER {player}")
-        return True
-    if positions_status[0] == player and positions_status[3] == player and positions_status[6] == player:
-        print(f"WINNN for PLAYER {player}")
-        return True
-    if positions_status[1] == player and positions_status[4] == player and positions_status[7] == player:
-        print(f"WINNN for PLAYER {player}")
-        return True
-    if positions_status[2] == player and positions_status[5] == player and positions_status[8] == player:
-        print(f"WINNN for PLAYER {player}")
-        return True
-
-    # TODO: fix winning condition
-
     if all_positions_used():
         print("DRAWW")
         return True
@@ -144,7 +127,10 @@ current_player = 1
 while not win_or_draw(current_player):
     position = input(
         f"PLAYER {current_player}: Which Position would you take?\t")
+    print("\n")
     place_player_position(current_player, int(position))
+    if win_or_draw(current_player):
+        break
     current_player = switch_players(current_player)
 
 # p = input("PLAYER X [Symbol: Z]: Which Position would you take?\t")
