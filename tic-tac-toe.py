@@ -31,7 +31,6 @@ PLAYGROUND_WIDTH = SELECTION_FIELD_WIDTH * COLUMN_COUNT + SPACE_TO_SYMBOL
 # 2 - player 2 field
 # only positions with status 0 can be edited
 positions_status = [0, 0, 0, 0, 0, 0, 0, 0, 0]
-avabilable_positions = []
 PLAYER1_SYMBOL = "X"
 PLAYER2_SYMBOL = "O"
 
@@ -66,35 +65,35 @@ def draw_playground():
                 middle_line = middle_line + "-"
             playground += middle_line + "\n"
     print(playground)
+    print("\n")
 
 
-def set_available_positions():
+def available_positions():
+    positions = []
     for index, position in enumerate(positions_status):
         if position == 0:
-            avabilable_positions.append(index)
+            positions.append(index)
+    return positions
 
 
 def place_player_position(player, position):
     position_index = position - 1
-    print(position_index in avabilable_positions)
-    if position_index in avabilable_positions:
-        positions_status[position_index] = player
+    # print(position_index)
+    # print(avabilable_positions)
+    # print(position_index in avabilable_positions)
+    if position_index not in available_positions():
+        print(
+            f"[PLAYER {1}]: Position {position} is not playable. Please choose an avaiable position!")
+        print("\n")
         return
-    print(
-        f"Position: {position} is not playable. Please choose an avaiable position!")
+    positions_status[position_index] = player
+    draw_playground()
 
 
-print("\n")
 draw_playground()
-set_available_positions()
 
 place_player_position(1, 1)
-print("\n")
-draw_playground()
 place_player_position(2, 5)
-print("\n")
-draw_playground()
 place_player_position(1, 5)
-print("\n")
-draw_playground()
+place_player_position(1, 2)
 # p = input("PLAYER X [Symbol: Z]: Which Position would you take?\t")
