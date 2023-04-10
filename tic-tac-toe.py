@@ -136,12 +136,12 @@ def all_positions_used():
 
 
 draw_playground()
-current_player = 1
-while not win_or_draw(current_player):
-    position = position_input(current_player)
+CURRENT_PLAYER = 1
+while not win_or_draw(CURRENT_PLAYER):
+    position = position_input(CURRENT_PLAYER)
     clear_console()
     print("\n")
-    place_player_position(current_player, position)
-    if win_or_draw(current_player):
+    place_player_position(CURRENT_PLAYER, position)
+    if win_or_draw(CURRENT_PLAYER):
         break
-    current_player = switch_players(current_player)
+    CURRENT_PLAYER = switch_players(CURRENT_PLAYER)
